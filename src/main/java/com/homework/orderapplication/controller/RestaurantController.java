@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.Positive;
 import java.util.List;
 
 @RestController
@@ -34,7 +35,7 @@ public class RestaurantController {
     @ApiOperation(value = "Get a restaurant by ID", notes = "Retrieve a restaurant by its ID")
     @ApiResponse(code = 404, message = "Restaurant not found", response = CustomError.class)
     @GetMapping(path = "/{id}")
-    public ResponseEntity<RestaurantDTO> getRestaurantById(@PathVariable("id") Long id) {
+    public ResponseEntity<RestaurantDTO> getRestaurantById(@PathVariable("id") @Positive Long id) {
         RestaurantDTO restaurant = restaurantService.mapRestaurantDTOById(id);
         return ResponseEntity.ok(restaurant);
     }
@@ -42,7 +43,7 @@ public class RestaurantController {
     @ApiOperation(value = "Get the menu of a restaurant by ID", notes = "Retrieve the menu of a restaurant by its ID")
     @ApiResponse(code = 404, message = "Restaurant not found", response = CustomError.class)
     @GetMapping(path = "/{id}/menu")
-    public ResponseEntity<List<ItemDTO>> getMenuOfRestaurantById(@PathVariable("id") Long id) {
+    public ResponseEntity<List<ItemDTO>> getMenuOfRestaurantById(@PathVariable("id") @Positive Long id) {
         List<ItemDTO> menu = restaurantService.mapRestaurantDTOById(id).getMenu();
         return ResponseEntity.ok(menu);
     }

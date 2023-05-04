@@ -15,12 +15,12 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Positive;
 import java.util.List;
 import java.util.Map;
-
+@Validated
 @RestController
 @RequestMapping(path = "/orders")
-@Validated
 @Api(value = "Order", tags = {"Order"})
 public class OrderController {
     private final OrderService orderService;
@@ -55,7 +55,7 @@ public class OrderController {
             @ApiResponse(code = 404, message = "Order not found", response = CustomError.class)
     })
     @GetMapping(path = "/{id}")
-    public ResponseEntity<OrderDTO> getOrderById(@PathVariable("id") Long id) {
+    public ResponseEntity<OrderDTO> getOrderById(@PathVariable("id") @Positive Long id) {
         OrderDTO order = orderService.getOrderById(id);
         return ResponseEntity.ok(order);
     }
@@ -66,7 +66,7 @@ public class OrderController {
             @ApiResponse(code = 404, message = "Order not found", response = CustomError.class)
     })
     @PatchMapping(value = "/{id}")
-    public OrderDTO updateOrderStatus(@PathVariable("id") Long id, @Valid @RequestBody OrderUpdateRequest orderUpdateRequest) {
+    public OrderDTO updateOrderStatus(@PathVariable("id") @Positive Long id, @Valid @RequestBody OrderUpdateRequest orderUpdateRequest) {
         return orderService.updateStatus(id, orderUpdateRequest.getStatus());
     }
 }
