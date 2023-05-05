@@ -1,5 +1,6 @@
 package com.homework.orderapplication.service;
 
+import com.homework.orderapplication.dto.OrderCustomerDTO;
 import com.homework.orderapplication.dto.OrderDTO;
 import com.homework.orderapplication.dto.OrderItemDTO;
 import com.homework.orderapplication.exception.CustomException;
@@ -43,15 +44,14 @@ public class OrderService {
         return modelMapper.map(savedOrder, OrderDTO.class);
     }
 
-    public OrderDTO getOrderById(Long id) {
+    public OrderCustomerDTO getOrderById(Long id) {
         Order order = getOrder(id);
-        return orderDTOMapper.mapOrderDTOWithCustomer(order);
+        return orderDTOMapper.mapOrderCustomerDTO(order);
     }
 
     public Map<String, List<OrderDTO>> getOrdersByRestaurants() {
         List<Order> orders = orderRepository.findAll();
-        List<OrderDTO> OrderDTOs = orderDTOMapper.mapAllOrderDTO(orders);
-        return orderDTOMapper.mapRestaurantOrders(OrderDTOs);
+        return orderDTOMapper.getRestaurantOrderMap(orders);
     }
 
     public OrderDTO updateStatus(Long id, String status) {

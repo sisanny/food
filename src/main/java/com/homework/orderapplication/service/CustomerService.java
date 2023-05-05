@@ -1,6 +1,5 @@
 package com.homework.orderapplication.service;
 
-import com.homework.orderapplication.dto.CustomerDTO;
 import com.homework.orderapplication.exception.CustomException;
 import com.homework.orderapplication.model.Customer;
 import com.homework.orderapplication.repository.CustomerRepository;
@@ -21,11 +20,7 @@ public class CustomerService {
         this.modelMapper = modelMapper;
     }
 
-    public CustomerDTO getCustomerDTO(Long id) {
-        return modelMapper.map(getCustomer(id), CustomerDTO.class);
-    }
-
-    private Customer getCustomer(Long id) {
+    public Customer getCustomer(Long id) {
         return customerRepository.findById(id)
                 .orElseThrow(() -> new CustomException("Customer with id " + id + " not found", HttpStatus.NOT_FOUND));
     }

@@ -4,8 +4,6 @@ import com.homework.orderapplication.dto.RestaurantDTO;
 import com.homework.orderapplication.exception.CustomException;
 import com.homework.orderapplication.model.Restaurant;
 import com.homework.orderapplication.repository.RestaurantRepository;
-import lombok.AllArgsConstructor;
-import lombok.Setter;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

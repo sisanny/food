@@ -9,6 +9,13 @@ import java.lang.annotation.Target;
 import static java.lang.annotation.ElementType.*;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
+/**
+ * A custom validation annotation that checks whether a string value
+ * is one of the values in the specified enum class.
+ *
+ * @since 1.0
+ * @see ValueOfEnumValidator
+ */
 @Target({METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE})
 @Retention(RUNTIME)
 @Documented

@@ -14,9 +14,9 @@ import java.util.List;
 @NoArgsConstructor
 public class OrderCreateRequest {
     @NotNull(message = "You need the customer id!")
-    private Long customer;
+    private Long customerId;
     @NotNull(message = "You need to add the restaurant id!")
-    private Long restaurant;
+    private Long restaurantId;
     @NotEmpty(message = "You need to add at least one item!")
     private List<OrderItemDTO> orderItems;
 }

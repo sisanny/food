@@ -1,5 +1,6 @@
 package com.homework.orderapplication.controller;
 
+import com.homework.orderapplication.dto.OrderCustomerDTO;
 import com.homework.orderapplication.dto.OrderDTO;
 import com.homework.orderapplication.exception.CustomError;
 import com.homework.orderapplication.request.OrderCreateRequest;
@@ -56,8 +57,8 @@ public class OrderController {
             @ApiResponse(code = 404, message = "Order not found", response = CustomError.class)
     })
     @GetMapping(path = "/{id}")
-    public ResponseEntity<OrderDTO> getOrderById(@PathVariable("id") @Positive Long id) {
-        OrderDTO order = orderService.getOrderById(id);
+    public ResponseEntity<OrderCustomerDTO> getOrderById(@PathVariable("id") @Positive Long id) {
+        OrderCustomerDTO order = orderService.getOrderById(id);
         return ResponseEntity.ok(order);
     }
 

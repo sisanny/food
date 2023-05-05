@@ -19,15 +19,12 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long customer;
-    private Long restaurant;
+    @OneToOne
+    private Customer customer;
+    @OneToOne
+    private Restaurant restaurant;
     @Enumerated(EnumType.STRING)
     private Status status;
     @OneToMany(mappedBy = "orderId", cascade = CascadeType.MERGE, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<OrderItem> items;
-
-    @Override
-    public String toString() {
-        return "";
-    }
 }

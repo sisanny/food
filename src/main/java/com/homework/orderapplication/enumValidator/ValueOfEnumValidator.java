@@ -8,6 +8,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * Validates that a string value is a member of a specified enum, Status.
+ * The enum class must have a method named "getValue"
+ * that returns a string representation of the enum value.
+ * Valid values are: received, preparing, ready, and delivered.
+ */
 public class ValueOfEnumValidator implements ConstraintValidator<ValueOfEnum, CharSequence> {
     private List<String> acceptedValues;
 

@@ -5,7 +5,9 @@ import com.homework.orderapplication.dto.OrderItemDTO;
 import com.homework.orderapplication.exception.CustomException;
 import com.homework.orderapplication.mapper.OrderDTOMapper;
 import com.homework.orderapplication.mapper.OrderMapper;
+import com.homework.orderapplication.model.Customer;
 import com.homework.orderapplication.model.Order;
+import com.homework.orderapplication.model.Restaurant;
 import com.homework.orderapplication.model.Status;
 import com.homework.orderapplication.repository.OrderRepository;
 import com.homework.orderapplication.request.OrderCreateRequest;
@@ -51,8 +53,8 @@ public class OrderServiceTest {
         items.add(OrderItemDTO.builder().orderId(2L).itemId(2L).quantity(3).specialInstructions("bla").build());
 
         OrderCreateRequest request = new OrderCreateRequest();
-        request.setCustomer(1L);
-        request.setRestaurant(1L);
+        request.setCustomerId(1L);
+        request.setRestaurantId(1L);
         request.setOrderItems(items);
 
         Order order = new Order();
@@ -75,12 +77,14 @@ public class OrderServiceTest {
         String status = "PREPARING";
         Order order = Order.builder()
                 .id(id)
-                .customer(1L)
-                .restaurant(1L)
+                .customer(Customer.builder().id(1L).build())
+                .restaurant(Restaurant.builder().id(1L).build())
                 .status(Status.RECEIVED)
                 .build();
+        OrderDTO orderDTO = new OrderDTO();
+        orderDTO.setStatus(Status.PREPARING);
         when(orderRepository.findById(id)).thenReturn(Optional.of(order));
-        when(modelMapper.map(order, OrderDTO.class)).thenReturn(OrderDTO.builder().status(Status.PREPARING).build());
+        when(modelMapper.map(order, OrderDTO.class)).thenReturn(orderDTO);
 
         OrderDTO result = orderService.updateStatus(id, status);
 
@@ -92,12 +96,10 @@ public class OrderServiceTest {
 
     @Test
     public void testUpdateStatusShouldThrowCustomExceptionWhenNotFound() {
-        // Arrange
         Long id = 1L;
         String status = Status.PREPARING.name();
         when(orderRepository.findById(id)).thenReturn(Optional.empty());
 
-        // Act and Assert
         assertThrows(CustomException.class, () -> orderService.updateStatus(id, status));
         verify(orderRepository, times(1)).findById(id);
         verify(orderRepository, never()).save(any(Order.class));
@@ -109,8 +111,8 @@ public class OrderServiceTest {
         String status = "INVALID_STATUS";
         Order order = Order.builder()
                 .id(id)
-                .customer(1L)
-                .restaurant(1L)
+                .customer(Customer.builder().id(1L).build())
+                .restaurant(Restaurant.builder().id(1L).build())
                 .status(Status.RECEIVED)
                 .build();
         when(orderRepository.findById(id)).thenReturn(Optional.of(order));
