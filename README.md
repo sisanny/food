@@ -31,4 +31,4 @@
 
 6. Ha az alkalmazásunkat az Intellij IDEA-ban szeretnénk futtatni, kattintsunk a jobb felső sarokban található zöld "Run" gombra, majd válasszuk ki az `Application` opciót. Az alkalmazásunk most már fut, és elérhető a `localhost:8080` webcímen.
 
-  
+7. Az applikáció swagger dokumentációja a következő linken érhető el: http://localhost:8080/swagger-ui/index.html#
