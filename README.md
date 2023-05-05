@@ -19,7 +19,7 @@
    ```
    spring.h2.console.enabled=true
    spring.h2.console.path=/h2-console
-   spring.datasource.url=jdbc:h2:mem:testdb
+   spring.datasource.url=jdbc:h2:file:~/fooddb
    spring.datasource.driverClassName=org.h2.Driver
    spring.datasource.username=sa
    spring.datasource.password=
@@ -27,8 +27,18 @@
    spring.jpa.defer-datasource-initialization=true
    spring.sql.init.mode=always
    spring.jpa.hibernate.ddl-auto=create-drop
+   spring.mvc.pathmatch.matching-strategy=ant-path-matcher
+
    ```
+6. Nyissuk meg a `src/main/resources/test.properties` fájlt, és ellenőrizzük, hogy a következő adatok helyesek-e:
 
-6. Ha az alkalmazásunkat az Intellij IDEA-ban szeretnénk futtatni, kattintsunk a jobb felső sarokban található zöld "Run" gombra, majd válasszuk ki az `Application` opciót. Az alkalmazásunk most már fut, és elérhető a `localhost:8080` webcímen.
+   ```
+   spring.datasource.url=jdbc:h2:mem:testdb
+   spring.datasource.driverClassName=org.h2.Driver
+   spring.datasource.username=sa
+   spring.datasource.password=
+   
+   ```
+7. Ha az alkalmazásunkat az Intellij IDEA-ban szeretnénk futtatni, kattintsunk a jobb felső sarokban található zöld "Run" gombra, majd válasszuk ki az `Application` opciót. Az alkalmazásunk most már fut, és elérhető a `localhost:8080` webcímen.
 
-7. Az applikáció swagger dokumentációja a következő linken érhető el: http://localhost:8080/swagger-ui/index.html#
+8. Az applikáció swagger dokumentációja a következő linken érhető el: http://localhost:8080/swagger-ui/index.html#
