@@ -39,11 +39,10 @@ public class OrderDTOMapperTest {
 
     @Test
     public void mapOrderDTOWithCustomer_shouldMapOrderAndCustomerToOrderDTO() {
-        Order order = new Order();
-        order.setId(1L);
-        order.setCustomer(1L);
-        OrderDTO expectedOrderDTO = new OrderDTO();
-        expectedOrderDTO.setCustomer(CustomerDTO.builder().id(1L).name("John").build());
+        Order order = Order.builder().id(1L).customer(1L).build();
+        OrderDTO expectedOrderDTO = OrderDTO.builder()
+                .customer(CustomerDTO.builder().id(1L).name("John").build())
+                        .build();
         when(customerService.getCustomerDTO(1L)).thenReturn(expectedOrderDTO.getCustomer());
         when(modelMapper.map(order, OrderDTO.class)).thenReturn(expectedOrderDTO);
 
@@ -54,13 +53,11 @@ public class OrderDTOMapperTest {
 
     @Test
     public void mapAllOrderDTO_shouldMapAllOrdersToOrderDTOList() {
-        Order order1 = new Order();
-        order1.setId(1L);
-        Order order2 = new Order();
-        order2.setId(2L);
+        Order order1 = Order.builder().id(1L).restaurant(1L).build();
+        Order order2 = Order.builder().id(2L).restaurant(2L).build();
         List<Order> orders = Arrays.asList(order1, order2);
-        OrderDTO expectedOrderDTO1 = new OrderDTO();
-        OrderDTO expectedOrderDTO2 = new OrderDTO();
+        OrderDTO expectedOrderDTO1 = OrderDTO.builder().build();
+        OrderDTO expectedOrderDTO2 = OrderDTO.builder().build();
         when(modelMapper.map(order1, OrderDTO.class)).thenReturn(expectedOrderDTO1);
         when(modelMapper.map(order2, OrderDTO.class)).thenReturn(expectedOrderDTO2);
 

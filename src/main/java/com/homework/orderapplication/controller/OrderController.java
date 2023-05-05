@@ -15,6 +15,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.util.List;
 import java.util.Map;
@@ -37,7 +38,7 @@ public class OrderController {
             @ApiResponse(code = 500, message = "Issue occurred with saving the entity", response = CustomError.class)
     })
     @PostMapping()
-    public OrderDTO addOrder(@Valid @RequestBody OrderCreateRequest orderCreateRequest) {
+    public OrderDTO addOrder(@Valid @RequestBody(required = false) @NotNull OrderCreateRequest orderCreateRequest) {
         return orderService.createOrder(orderCreateRequest);
     }
 
@@ -66,7 +67,7 @@ public class OrderController {
             @ApiResponse(code = 404, message = "Order not found", response = CustomError.class)
     })
     @PatchMapping(value = "/{id}")
-    public OrderDTO updateOrderStatus(@PathVariable("id") @Positive Long id, @Valid @RequestBody OrderUpdateRequest orderUpdateRequest) {
+    public OrderDTO updateOrderStatus(@PathVariable("id") @Positive Long id, @Valid @RequestBody(required = false) @NotNull OrderUpdateRequest orderUpdateRequest) {
         return orderService.updateStatus(id, orderUpdateRequest.getStatus());
     }
 }

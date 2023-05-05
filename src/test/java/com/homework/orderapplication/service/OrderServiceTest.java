@@ -42,10 +42,13 @@ public class OrderServiceTest {
 
     @Test
     public void testCreateOrder() {
-        OrderCreateRequest request = new OrderCreateRequest();
         List<OrderItemDTO> items = new ArrayList<>();
-        items.add(new OrderItemDTO(1L, 1L, 10, "ble"));
-        items.add(new OrderItemDTO(2L, 2L, 15, "bla"));
+        items.add(OrderItemDTO.builder().orderId(1L).itemId(1L).quantity(1).build());
+        items.add(OrderItemDTO.builder().orderId(2L).itemId(2L).quantity(3).specialInstructions("bla").build());
+
+        OrderCreateRequest request = new OrderCreateRequest();
+        request.setCustomer(1L);
+        request.setRestaurant(1L);
         request.setOrderItems(items);
 
         Order order = new Order();

@@ -9,7 +9,6 @@ import com.homework.orderapplication.model.Order;
 import com.homework.orderapplication.model.Status;
 import com.homework.orderapplication.repository.OrderRepository;
 import com.homework.orderapplication.request.OrderCreateRequest;
-import lombok.Setter;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
