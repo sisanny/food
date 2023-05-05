@@ -1,6 +1,5 @@
 package com.homework.orderapplication.exception;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 

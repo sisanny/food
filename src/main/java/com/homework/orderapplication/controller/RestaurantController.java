@@ -7,9 +7,11 @@ import com.homework.orderapplication.service.RestaurantService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.constraints.Positive;
 import java.util.List;
@@ -20,7 +22,6 @@ import java.util.List;
 public class RestaurantController {
     private final RestaurantService restaurantService;
 
-    @Autowired
     public RestaurantController(RestaurantService restaurantService) {
         this.restaurantService = restaurantService;
     }
@@ -43,7 +44,7 @@ public class RestaurantController {
     @ApiOperation(value = "Get the menu of a restaurant by ID", notes = "Retrieve the menu of a restaurant by its ID")
     @ApiResponse(code = 404, message = "Restaurant not found", response = CustomError.class)
     @GetMapping(path = "/{id}/menu")
-    public ResponseEntity<List<ItemDTO>> getMenuOfRestaurantById(@PathVariable("id") @Positive Long id) {
+    public ResponseEntity<List<ItemDTO>> getRestaurantMenuById(@PathVariable("id") @Positive Long id) {
         List<ItemDTO> menu = restaurantService.mapRestaurantDTOById(id).getMenu();
         return ResponseEntity.ok(menu);
     }
