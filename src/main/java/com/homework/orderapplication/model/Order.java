@@ -23,6 +23,6 @@ public class Order {
     private Restaurant restaurant;
     @Enumerated(EnumType.STRING)
     private Status status;
-    @OneToMany(mappedBy = "orderId", cascade = CascadeType.MERGE, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "orderId")
     private List<OrderItem> items;
 }
